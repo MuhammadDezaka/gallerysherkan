@@ -7,6 +7,7 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomentarFotoController;
 use App\Http\Controllers\LikeFotoController;
+use App\Http\Controllers\PublicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +20,11 @@ use App\Http\Controllers\LikeFotoController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/',[PublicController::class, 'index'])->name('index');
 
-Route::get('/app', function () {
-    return view('layouts.app');
-});
+// Route::get('/app', function () {
+//     return view('layouts.app');
+// });
 
 
 Route::middleware('guest')->group(function(){
@@ -51,7 +50,7 @@ Route::middleware('auth')->group(function(){
 	
 	Route::get('/foto',[FotoController::class, 'index'])->name('foto.index');
 	Route::post('/foto',[FotoController::class, 'store'])->name('foto.store');
-	Route::post('/afoto/{id}',[FotoController::class, 'edit'])->name('foto.edit');
+	Route::post('/foto/{id}',[FotoController::class, 'edit'])->name('foto.edit');
 	Route::delete('/foto/{id}',[FotoController::class, 'delete'])->name('foto.delete');
 	
 	Route::post('/komentar',[KomentarFotoController::class, 'store'])->name('komentar.store');

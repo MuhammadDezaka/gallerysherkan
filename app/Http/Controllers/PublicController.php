@@ -14,6 +14,6 @@ class PublicController extends Controller
 
         
         // return dd($data);
-        return view('index',compact('data'));
+        return view('public.index',compact('data'));
     }
 }

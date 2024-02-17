@@ -1,5 +1,5 @@
  <!-- Brand Logo -->
- <a href="index3.html" class="brand-link">
+ <a href="/" class="brand-link">
     <span class="brand-text font-weight-light">Gallery</span>
   </a>
 
@@ -11,7 +11,7 @@
         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div> --}}
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block">{{ Auth::user()->username }}</a>
       </div>
     </div>
 

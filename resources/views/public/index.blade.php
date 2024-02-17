@@ -1,8 +1,9 @@
-@extends('layouts.app')
+@extends('index')
 
-@section('title','Home')
 @section('main')
 
+
+<div class="row justify-content-center align-items-center mt-5">
 @foreach ( $data as $item )
   <style>
     .image-container {
@@ -30,17 +31,26 @@
   <div class="image-buttons">
       <form action="/like-foto" method="post">
           @csrf
-          <input type="hidden" name="c_url" value="dashboard">
+          <input type="hidden" name="c_url" value="public">
           <input type="hidden" name="foto_id" value="{{ $item->id }}">
-          @if(\App\Models\LikeFoto::where('user_id', Auth::user()->id)->where('foto_id', $item->id)->exists())
+        @if(Auth::check())
+            @if(\App\Models\LikeFoto::where('user_id', Auth::user()->id)->where('foto_id', $item->id)->exists())
           <button class="btn btn-outline-secondary btn-sm" type="submit">
               <i class="fas fa-heart"></i> Unlike
           </button>
-      @else
+            @else
           <button class="btn btn-outline-secondary btn-sm" type="submit">
               <i class="fas fa-heart"></i> Like
           </button>
-      @endif
+            @endif
+
+        @else
+        <button class="btn btn-outline-secondary btn-sm" type="submit">
+            <i class="fas fa-heart"></i> Like
+        </button>
+        @endif
+   
+
       </form>
       <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#instagramModal{{ $item->id }}">
           <i class="fas fa-comment"></i> Comment
@@ -57,7 +67,9 @@
               <img src="{{ asset('storage/images/' . $item->lokasi_file) }}" class="img-fluid" style="min-width: 300px; min-height: 300px;" alt="Instagram Image">
             </div>
             <div class="col-md-4">
-              <h2>Di post oleh : {{ $item-> }}</h2>
+              <h2>Di Post Oleh : {{ $item->user->username }}</h2>
+              <span class="badge badge-dark">{{ $item->tanggal_unggah }}</span>
+              Like :  <span class="badge badge-pill badge-danger">{{ App\Models\LikeFoto::where('foto_id',$item->id)->count() }}</span>
               <ul class="list-group">
                 @foreach ($item->komentar as $komentar )
                 <span>{{ $komentar->user->username }}</span><li class="list-group-item">{{ $komentar->isi_komentar }}</li>
@@ -81,5 +93,5 @@
     </div>
   </div>
 @endforeach
-
+</div>
 @endsection

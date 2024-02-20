@@ -61,7 +61,7 @@
                                                     <div class="mb-3">
                                                         <label for="example-text-input" class="form-label"><strong>Album</strong></label>
                                                         <select class="custom-select" name="album_id" >
-                                                            @foreach (App\Models\Album::where('user_id',Auth::user()->id) as $album )
+                                                            @foreach (App\Models\Album::where('user_id',Auth::user()->id)->get() as $album )
                                                                 <option value="{{ $album->id }}">{{ $album->nama_album }}</option>
                                                             @endforeach
                                                         </select>
@@ -145,7 +145,7 @@
                     <div class="mb-3">
                         <label for="example-text-input" class="form-label"><strong>Album</strong></label>
                         <select class="custom-select" name="album_id" >
-                            @foreach (App\Models\Album::where('user_id',Auth::user()->id) as $album )
+                            @foreach (App\Models\Album::where('user_id',Auth::user()->id)->get() as $album )
                                 <option value="{{ $album->id }}">{{ $album->nama_album }}</option>
                             @endforeach
                         </select>

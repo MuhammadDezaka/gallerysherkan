@@ -67,7 +67,7 @@
             </ul>
             <form action="/komentar" method="post">
               @csrf
-              <input type="hidden" name="c_url" value="public">
+              <input type="hidden" name="c_url" value="home">
               <input type="hidden" name="foto_id" value="{{ $item->id }}">
               <div class="input-group mt-3">
                 <input type="text" class="form-control" placeholder="Add a comment" name="isi_komentar">

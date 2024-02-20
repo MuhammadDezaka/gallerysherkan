@@ -49,37 +49,39 @@
 </div>
 
 <div class="modal fade" id="instagramModal{{ $item->id }}" tabindex="-1" aria-labelledby="instagramModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-8 d-flex justify-content-center align-items-center">
-              <img src="{{ asset('storage/images/' . $item->lokasi_file) }}" class="img-fluid" style="min-width: 300px; min-height: 300px;" alt="Instagram Image">
-            </div>
-            <div class="col-md-4">
-              <h2>Di post oleh : {{ $item-> }}</h2>
-              <ul class="list-group">
-                @foreach ($item->komentar as $komentar )
-                <span>{{ $komentar->user->username }}</span><li class="list-group-item">{{ $komentar->isi_komentar }}</li>
-                @endforeach
-              </ul>
-              <form action="/komentar" method="post">
-                @csrf
-                <input type="hidden" name="c_url" value="public">
-                <input type="hidden" name="foto_id" value="{{ $item->id }}">
-                <div class="input-group mt-3">
-                  <input type="text" class="form-control" placeholder="Add a comment" name="isi_komentar">
-                  <button class="btn btn-primary btn-sm ml-2" type="submit">
-                    <i class="fas fa-paper-plane"></i> Send
-                  </button>
-                </div>
-              </form>
-            </div>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-8 d-flex justify-content-center align-items-center">
+            <img src="{{ asset('storage/images/' . $item->lokasi_file) }}" class="img-fluid" style="min-width: 300px; min-height: 300px;" alt="Instagram Image">
+          </div>
+          <div class="col-md-4">
+            <h2>Di Post Oleh : {{ $item->user->username }}</h2>
+            <span class="badge badge-dark">{{ $item->tanggal_unggah }}</span>
+            Like :  <span class="badge badge-pill badge-danger">{{ App\Models\LikeFoto::where('foto_id',$item->id)->count() }}</span>
+            <ul class="list-group">
+              @foreach ($item->komentar as $komentar )
+              <span>{{ $komentar->user->username }}</span><li class="list-group-item">{{ $komentar->isi_komentar }}</li>
+              @endforeach
+            </ul>
+            <form action="/komentar" method="post">
+              @csrf
+              <input type="hidden" name="c_url" value="public">
+              <input type="hidden" name="foto_id" value="{{ $item->id }}">
+              <div class="input-group mt-3">
+                <input type="text" class="form-control" placeholder="Add a comment" name="isi_komentar">
+                <button class="btn btn-primary btn-sm ml-2" type="submit">
+                  <i class="fas fa-paper-plane"></i> Send
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 @endforeach
 
 @endsection

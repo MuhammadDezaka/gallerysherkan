@@ -11,19 +11,21 @@ class FotoController extends Controller
 {
     public function index()
     {
-        $data = Foto::all();
+        $id =  Auth::user()->id;
+        $data = Foto::where('user_id', $id)->get();
         return view('admin.foto',compact('data'));
     }
 
     public function store(Request $request)
     {
         //harus kasih perintah cmd "php artisan storage:link"
-        $image = $request->file('image');
+        if($request->file('image')){
+            $image = $request->file('image');
 
-        $path = $image->store('public/images');
-
-        $filename = basename($path);
-
+            $path = $image->store('public/images');
+    
+            $filename = basename($path);
+        }
         $data = $request->all();
         $data['tanggal_unggah'] = Carbon::now();
         $data['user_id'] =  Auth::user()->id;

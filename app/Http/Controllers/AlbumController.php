@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class AlbumController extends Controller
 {
     public function index(){
-
-        $data = Album::all();
+        $id =  Auth::user()->id;
+        $data = Album::where('user_id',$id)->get();
         return view('admin.album',compact('data'));
     }
 

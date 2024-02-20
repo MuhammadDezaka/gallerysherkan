@@ -9,11 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class PublicController extends Controller
 {
     public function index(){
-        // $user_id = Auth::user()->id;
-        $data = Foto::with('komentar.user','like')->get();
+        $data = Foto::with('komentar.user','like','user')->get();
 
-        
-        // return dd($data);
         return view('public.index',compact('data'));
     }
 }

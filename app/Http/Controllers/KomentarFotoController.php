@@ -20,7 +20,7 @@ class KomentarFotoController extends Controller
             KomentarFoto::create($data);  
             $url = $request->c_url == 'public'? '/': 'home';
             // $redirectTo = request()->url() == route('home') ? route('home') : '/';
-            return redirect($url );
+            return redirect($url);
   
         } else {
             return redirect('/login');

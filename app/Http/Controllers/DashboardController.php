@@ -11,8 +11,6 @@ class DashboardController extends Controller
     public function index(){
         $user_id = Auth::user()->id;
         $data = Foto::with('komentar.user','like','user')->where('user_id',$user_id )->get();
-
-        
         // return dd($data);
         return view('admin.dashboard',compact('data'));
     }

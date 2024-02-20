@@ -24,7 +24,7 @@
              with font-awesome or any other icon font library -->
         <li class="nav-header">Main Menu</li>
         <li class="nav-item">
-          <a href="/app" class="nav-link">
+          <a href="/home" class="nav-link">
             <i class="nav-icon far fa-image"></i>
             <p>
               Home
